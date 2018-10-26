@@ -20,9 +20,22 @@ public class CDLList {
 		L.nodeR = newNode.nodeL;
 	}
 
-	// Get a data of the first node's left.
+	// Get a data of the first node
 	public ListNode getFirstNode() {
 		return L.nodeR;
+	}
+
+	// Counter-Clockwise!!
+	public void deleteNode(ListNode node) throws Exception {
+		if(getFirstNode() == null) throw new Exception("The list is empty!!");
+		else if(node == null) throw new Exception("The node is empty!!");
+		else {
+			node.nodeR.nodeL = node.nodeL;
+			node.nodeL.nodeR = node.nodeR;
+			if(node.equals(getFirstNode())) {
+				L.nodeR = node.nodeL;
+			}
+		}
 	}
 	
 	// Insert a data right the node.
