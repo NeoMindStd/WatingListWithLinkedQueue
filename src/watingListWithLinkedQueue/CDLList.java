@@ -6,23 +6,26 @@ public class CDLList {
 
 	// Insert a data right the L.
 	// Clockwise!!
-	public void addLastNode(String data) {
+	public void addLastNode(ListNode node) {
+		addLastNode(node.data);
+	}
+	public void addLastNode(Customer data) {
 		ListNode newNode;
-		if(L.nodeR == null) {	// There are no nodes.
+		if(L.RNode == null) {	// There are no nodes.
 			newNode = new ListNode(data);
-			newNode.nodeL = newNode;
-			newNode.nodeR = newNode;
+			newNode.LNode = newNode;
+			newNode.RNode = newNode;
+			L.RNode = newNode.RNode;
 		} else {				// Already exist nodes.
-			newNode = new ListNode(data, getFirstNode(), getFirstNode().nodeR);
-			newNode.nodeL.nodeR = newNode;
-			newNode.nodeR.nodeL = newNode;
+			newNode = new ListNode(data, getFirstNode().LNode, getFirstNode());
+			newNode.LNode.RNode = newNode;
+			newNode.RNode.LNode = newNode;
 		}
-		L.nodeR = newNode.nodeL;
 	}
 
 	// Get a data of the first node
 	public ListNode getFirstNode() {
-		return L.nodeR;
+		return L.RNode;
 	}
 
 	// Counter-Clockwise!!
@@ -30,22 +33,24 @@ public class CDLList {
 		if(getFirstNode() == null) throw new Exception("The list is empty!!");
 		else if(node == null) throw new Exception("The node is empty!!");
 		else {
-			node.nodeR.nodeL = node.nodeL;
-			node.nodeL.nodeR = node.nodeR;
+			node.RNode.LNode = node.LNode;
+			node.LNode.RNode = node.RNode;
 			if(node.equals(getFirstNode())) {
-				L.nodeR = node.nodeL;
+				if(node.RNode.equals(node))
+					L.RNode = null;
+				else L.RNode = node.RNode;
 			}
 		}
 	}
 	
 	// Insert a data right the node.
-	public void insertNode(String data, ListNode node) {
+	public void insertNode(Customer data, ListNode existNode) {
 		ListNode newNode;
-		if(node.equals(L)) addLastNode(data);
+		if(existNode.equals(L)) addLastNode(data);
 		else {
-			newNode = new ListNode(data, node, node.nodeR);
-			node.nodeR = newNode;
-			newNode.nodeR.nodeL = newNode;
+			newNode = new ListNode(data, existNode, existNode.RNode);
+			newNode.RNode.LNode = newNode;
+			newNode.LNode.RNode = newNode;
 		}
 	}
 }

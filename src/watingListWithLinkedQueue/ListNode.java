@@ -1,37 +1,25 @@
 package watingListWithLinkedQueue;
 
 public class ListNode {
-	public String data;
-	public ListNode nodeL;
-	public ListNode nodeR;
+	public Customer data;
+	public ListNode LNode;
+	public ListNode RNode;
 	
 	public ListNode() {}
 	
-	public ListNode(String data) {
-		this.data = data;
-	}
-
+	public ListNode(Customer data) { this(data, null, null); }
 	// For the start node. not a data node!
-	public ListNode(ListNode nodeR) {
-		this.data = null;
-		this.nodeL = null;
-		this.nodeR = nodeR;
-	}
-	
-	public ListNode(ListNode nodeL, ListNode nodeR) {
-		this.nodeL = nodeL;
-		this.nodeR = nodeR;
-	}
+	public ListNode(ListNode RNode) { this(null, null, RNode); }
+	public ListNode(ListNode LNode, ListNode RNode) { this(null, LNode, RNode); }
 
-	public ListNode(String data, ListNode nodeR) {
-		this.data = data;
-		this.nodeR = nodeR;
+	public ListNode(Customer data, ListNode RNode) {
+		this(data, null, RNode);
 	}
 	
-	public ListNode(String data, ListNode nodeL, ListNode nodeR) {
+	public ListNode(Customer data, ListNode LNode, ListNode RNode) {
 		this.data = data;
-		this.nodeL = nodeL;
-		this.nodeR = nodeR;
+		this.LNode = LNode;
+		this.RNode = RNode;
 	}
 	
 	public void printData() {
@@ -40,7 +28,7 @@ public class ListNode {
 	
 	public void printAll() {
 		System.out.println("Data : " + data);
-		System.out.println("Left : " + nodeL);
-		System.out.println("Right : " + nodeR);
+		System.out.println("Left : " + LNode);
+		System.out.println("Right : " + RNode);
 	}
 }
